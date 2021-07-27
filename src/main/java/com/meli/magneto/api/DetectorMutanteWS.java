@@ -1,26 +1,26 @@
 package com.meli.magneto.api;
 
-import com.meli.magneto.acl.ValidadorACL;
 import com.meli.magneto.adn.ADN;
 import com.meli.magneto.api.controlador.ControladorBase;
+import com.meli.magneto.api.dto.ADNSolicitud;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
+@Path("/")
 public class DetectorMutanteWS extends ControladorBase {
 
     public DetectorMutanteWS(){
         prepararDependencias();
     }
 
-    @POST()
     @Path("/mutant")
     @Consumes({"application/json"})
     @Produces({"application/json"})
-    public Response esMutante(String[] adn1d) {
-        ValidadorACL validadorACL = new ValidadorACL();
-        if (validadorACL.esUnADNCorrecto(adn1d)) {
-            ADN adn = new ADN(adn1d);
+    @POST()
+    public Response esMutante(ADNSolicitud peticion) {
+        if (validadorACL.esUnADNCorrecto(peticion.getDna())) {
+            ADN adn = new ADN(peticion.getDna());
             if(administradorADN.isMutant(adn)){
                 return Response.status(Response.Status.OK).build();
             }else{

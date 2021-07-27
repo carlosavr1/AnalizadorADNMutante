@@ -1,5 +1,6 @@
 package com.meli.magneto.api.controlador;
 
+import com.meli.magneto.acl.ValidadorACL;
 import com.meli.magneto.adn.AdministradorADN;
 import com.meli.magneto.adn.evaluador.*;
 import com.meli.magneto.adn.extractor.ExtractorSecuenciaDiagDerIzq;
@@ -9,6 +10,7 @@ import com.meli.magneto.adn.extractor.ExtractorSecuenciaVertical;
 
 public class ControladorBase {
 
+    protected ValidadorACL validadorACL;
     protected AdministradorADN administradorADN;
     protected AdministradorEvaluadoresSecuencia administradorEvaluadoresSecuencia;
     protected EvaluadorSecuenciaHorizontal evaluadorSecuenciaHorizontal;
@@ -17,6 +19,7 @@ public class ControladorBase {
     protected EvaluadorSecuenciaDiagDerIzq evaluadorSecuenciaDiagDerIzq;
 
     public void prepararDependencias() {
+        validadorACL = new ValidadorACL();
         ExtractorSecuenciaHorizontal extractorCadenaHorizontal = new ExtractorSecuenciaHorizontal();
         evaluadorSecuenciaHorizontal = new EvaluadorSecuenciaHorizontal(extractorCadenaHorizontal);
         ExtractorSecuenciaVertical extractorSecuenciaVertical = new ExtractorSecuenciaVertical();
