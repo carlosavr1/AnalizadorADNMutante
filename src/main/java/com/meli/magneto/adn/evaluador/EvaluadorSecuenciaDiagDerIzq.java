@@ -1,6 +1,6 @@
 package com.meli.magneto.adn.evaluador;
 
-import com.meli.magneto.adn.ADN;
+import com.meli.magneto.adn.modelo.ADN;
 import com.meli.magneto.adn.extractor.ExtractorSecuenciaDiagDerIzq;
 
 public class EvaluadorSecuenciaDiagDerIzq extends EvaluadorSecuenciaADN {

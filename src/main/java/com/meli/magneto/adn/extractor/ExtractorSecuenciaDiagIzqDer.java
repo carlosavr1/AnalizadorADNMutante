@@ -1,6 +1,6 @@
 package com.meli.magneto.adn.extractor;
 
-import com.meli.magneto.adn.ADN;
+import com.meli.magneto.adn.modelo.ADN;
 
 public class ExtractorSecuenciaDiagIzqDer implements IExtractorSecuenciaADN {
 

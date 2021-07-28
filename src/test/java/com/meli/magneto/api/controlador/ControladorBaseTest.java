@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ControladorBaseTest {
 
     @Test
-    void prepararDependenciasDebeInstanciarTodasLasClasesNecesarias() {
+    void prepararDependenciasDebeInstanciarTodasLasClasesNecesarias() throws Exception {
         ControladorBase controladorBase = new ControladorBase();
         controladorBase.prepararDependencias();
 

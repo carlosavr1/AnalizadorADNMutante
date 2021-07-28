@@ -1,8 +1,7 @@
 package com.meli.magneto.adn.evaluador;
 
-import com.meli.magneto.adn.ADN;
+import com.meli.magneto.adn.modelo.ADN;
 import com.meli.magneto.adn.extractor.ExtractorSecuenciaDiagDerIzq;
-import com.meli.magneto.adn.extractor.ExtractorSecuenciaDiagIzqDer;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
