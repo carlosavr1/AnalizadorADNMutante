@@ -8,6 +8,9 @@ public class ADNRegistro {
     String tipo;
     int cantidad;
 
+    public ADNRegistro() {
+    }
+
     public ADNRegistro(String id, String identificadorHash, String[] adn, String tipo, int cantidad) {
         this.id = id;
         this.identificadorHash = identificadorHash;
@@ -34,5 +37,25 @@ public class ADNRegistro {
 
     public int getCantidad() {
         return cantidad;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setIdentificadorHash(String identificadorHash) {
+        this.identificadorHash = identificadorHash;
+    }
+
+    public void setAdn(String[] adn) {
+        this.adn = adn;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 }

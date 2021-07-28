@@ -3,6 +3,7 @@ package com.meli.magneto.adn.db;
 import com.azure.cosmos.ConsistencyLevel;
 import com.azure.cosmos.CosmosClientBuilder;
 import com.azure.cosmos.models.*;
+import com.azure.cosmos.util.CosmosPagedIterable;
 import com.meli.magneto.adn.db.modelo.ADNRegistro;
 import com.meli.magneto.util.ConfiguracionBD;
 
@@ -38,9 +39,23 @@ public class CosmosPersistenciaADN extends PersistenciaADN {
     }
 
     @Override
-    public void crearADNRegistro(String identificadorHashADN, String[] adn, String tipo, int cantidad) throws Exception {
-        ADNRegistro aDNRegistro = new ADNRegistro(UUID.randomUUID().toString(), identificadorHashADN, adn, tipo, cantidad);
+    public void crearADNRegistro(ADNRegistro aDNRegistro) throws Exception {
         contenedor.createItem(aDNRegistro, new PartitionKey(aDNRegistro.getIdentificadorHash()), new CosmosItemRequestOptions());
+    }
+
+    public ADNRegistro consultarADNRegistro(String identificadorHashADN) throws Exception {
+        String sql = "SELECT * FROM c WHERE c.identificadorHash = '"+identificadorHashADN+"'";
+        CosmosPagedIterable<ADNRegistro> ADNsFiltrados = contenedor.queryItems(sql, new CosmosQueryRequestOptions(), ADNRegistro.class);
+        ADNRegistro aDNRegistro = null;
+        if (ADNsFiltrados.iterator().hasNext()) {
+            aDNRegistro = ADNsFiltrados.iterator().next();
+        }
+        return aDNRegistro;
+    }
+
+    @Override
+    public void actualizarCantidadADNRegistro(ADNRegistro aDNRegistro) throws Exception {
+        contenedor.upsertItem(aDNRegistro, new CosmosItemRequestOptions());
     }
 
 }
