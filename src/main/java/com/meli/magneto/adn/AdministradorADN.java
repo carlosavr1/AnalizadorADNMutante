@@ -23,6 +23,7 @@ public class AdministradorADN {
     }
 
     public boolean isMutant(ADN adn) throws Exception {
+        String identificadorHashADN = codificador.md5HashString("PruebaADN");
         ArrayList<EvaluadorSecuenciaADN> evaluadores = new ArrayList<>();
         boolean evaluarHorizontal;
         boolean evaluarVertical;
@@ -41,12 +42,12 @@ public class AdministradorADN {
                     cantidadSencuencias = cantidadSencuencias + (evaluadorSecuenciaADN.evaluarSecuencia(adn, x, y, instruccionSecuenciaRegex) ? 1 : 0);
                 }
                 if(cantidadSencuencias > 1){
-                    String identificadorHashADN = codificador.md5HashString("PruebaADN");
                     persistenciaADN.crearADNRegistro(identificadorHashADN, adn.getAdnOriginal(), TiposADN.MUTANTE.name(), 1);
                     return true;
                 }
             }
         }
+        persistenciaADN.crearADNRegistro(identificadorHashADN, adn.getAdnOriginal(), TiposADN.HUMANO.name(), 1);
         return false;
     }
 
