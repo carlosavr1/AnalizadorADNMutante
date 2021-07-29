@@ -2,8 +2,10 @@ package com.meli.magneto.adn;
 
 import com.meli.magneto.adn.db.IPersistenciaADN;
 import com.meli.magneto.adn.db.modelo.ADNRegistro;
+import com.meli.magneto.adn.db.modelo.EstadisticasRegistro;
 import com.meli.magneto.adn.evaluador.*;
 import com.meli.magneto.adn.modelo.ADN;
+import com.meli.magneto.adn.modelo.Estadisticas;
 import com.meli.magneto.adn.modelo.TiposADN;
 import com.meli.magneto.util.Codificador;
 
@@ -73,6 +75,17 @@ public class AdministradorADN {
         ADNRegistro adnRegistro = new ADNRegistro(UUID.randomUUID().toString(), identificadorHashADN, adn, tipo, cantidad);;
         return adnRegistro;
 
+    }
+
+    public Estadisticas getStats() throws Exception {
+        EstadisticasRegistro estadisticasRegistro = persistenciaADN.obtenerEstadisticas();
+        return crearEstadisticas(estadisticasRegistro);
+    }
+
+    public Estadisticas crearEstadisticas(EstadisticasRegistro estadisticasRegistro) {
+        double promedio = estadisticasRegistro.getCantidadMutantes() / (estadisticasRegistro.getCantidadMutantes() + estadisticasRegistro.getCantidadHumanos());
+        Estadisticas estadisticas = new Estadisticas(estadisticasRegistro.getCantidadMutantes(), estadisticasRegistro.getCantidadHumanos(), promedio);
+        return estadisticas;
     }
 
 }

@@ -1,6 +1,7 @@
 package com.meli.magneto.api;
 
 import com.meli.magneto.adn.modelo.ADN;
+import com.meli.magneto.adn.modelo.Estadisticas;
 import com.meli.magneto.api.controlador.ControladorBase;
 import com.meli.magneto.api.dto.ADNSolicitud;
 
@@ -30,6 +31,15 @@ public class DetectorMutanteWS extends ControladorBase {
             return Response.status(Response.Status.BAD_REQUEST).entity("El ADN no esta formado correctamente").build();
         }
 
+    }
+
+    @Path("/stats")
+    @Consumes({"application/json"})
+    @Produces({"application/json"})
+    @GET()
+    public Response obtenerEstadisticas() throws Exception {
+        Estadisticas estadisticas = administradorADN.getStats();
+        return Response.status(Response.Status.OK).entity(estadisticas).build();
     }
 
 }
