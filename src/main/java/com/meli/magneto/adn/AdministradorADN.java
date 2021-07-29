@@ -8,6 +8,7 @@ import com.meli.magneto.adn.modelo.ADN;
 import com.meli.magneto.adn.modelo.Estadisticas;
 import com.meli.magneto.adn.modelo.TiposADN;
 import com.meli.magneto.util.Codificador;
+import com.meli.magneto.util.OperadorMatematico;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -18,11 +19,13 @@ public class AdministradorADN {
     private AdministradorEvaluadoresSecuencia administradorEvaluadoresSecuencia;
     private IPersistenciaADN persistenciaADN;
     private Codificador codificador;
+    private OperadorMatematico operadorMatematico;
 
-    public AdministradorADN(AdministradorEvaluadoresSecuencia administradorEvaluadoresSecuencia, IPersistenciaADN persistenciaADN, Codificador codificador){
+    public AdministradorADN(AdministradorEvaluadoresSecuencia administradorEvaluadoresSecuencia, IPersistenciaADN persistenciaADN, Codificador codificador, OperadorMatematico operadorMatematico){
         this.administradorEvaluadoresSecuencia = administradorEvaluadoresSecuencia;
         this.persistenciaADN = persistenciaADN;
         this.codificador = codificador;
+        this.operadorMatematico = operadorMatematico;
     }
 
     public boolean isMutant(ADN adn) throws Exception {
@@ -83,7 +86,7 @@ public class AdministradorADN {
     }
 
     public Estadisticas crearEstadisticas(EstadisticasRegistro estadisticasRegistro) {
-        double promedio = estadisticasRegistro.getCantidadMutantes() / (estadisticasRegistro.getCantidadMutantes() + estadisticasRegistro.getCantidadHumanos());
+        double promedio = operadorMatematico.calcularTasa(estadisticasRegistro.getCantidadMutantes(), estadisticasRegistro.getCantidadHumanos());
         Estadisticas estadisticas = new Estadisticas(estadisticasRegistro.getCantidadMutantes(), estadisticasRegistro.getCantidadHumanos(), promedio);
         return estadisticas;
     }

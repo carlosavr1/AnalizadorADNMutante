@@ -1,14 +1,17 @@
 package com.meli.magneto.adn.modelo;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 
+import org.codehaus.jackson.annotate.JsonAutoDetect;
+import org.codehaus.jackson.annotate.JsonProperty;
+
+@JsonAutoDetect(fieldVisibility=JsonAutoDetect.Visibility.ANY, getterVisibility=JsonAutoDetect.Visibility.NONE, setterVisibility=JsonAutoDetect.Visibility.NONE)
 public class Estadisticas {
 
-
+    @JsonProperty("count_mutant_dna")
     private int cantidadADNsMutantes;
-
+    @JsonProperty("count_human_dna")
     private int cantidadADNsHumanos;
-
+    @JsonProperty("ratio")
     private double proporcion;
 
     public Estadisticas(int cantidadADNsMutantes, int cantidadADNsHumanos, double proporcion) {
@@ -17,7 +20,6 @@ public class Estadisticas {
         this.proporcion = proporcion;
     }
 
-    @JsonProperty("count_mutant_dna")
     public int getCantidadADNsMutantes() {
         return cantidadADNsMutantes;
     }
@@ -26,7 +28,6 @@ public class Estadisticas {
         this.cantidadADNsMutantes = cantidadADNsMutantes;
     }
 
-    @JsonProperty("count_human_dna")
     public int getCantidadADNsHumanos() {
         return cantidadADNsHumanos;
     }
@@ -35,7 +36,6 @@ public class Estadisticas {
         this.cantidadADNsHumanos = cantidadADNsHumanos;
     }
 
-    @JsonProperty("ratio")
     public double getProporcion() {
         return proporcion;
     }

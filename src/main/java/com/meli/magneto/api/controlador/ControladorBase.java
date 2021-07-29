@@ -10,6 +10,7 @@ import com.meli.magneto.adn.extractor.ExtractorSecuenciaDiagIzqDer;
 import com.meli.magneto.adn.extractor.ExtractorSecuenciaHorizontal;
 import com.meli.magneto.adn.extractor.ExtractorSecuenciaVertical;
 import com.meli.magneto.util.Codificador;
+import com.meli.magneto.util.OperadorMatematico;
 
 public class ControladorBase {
 
@@ -37,7 +38,8 @@ public class ControladorBase {
         cosmosPersistenciaADN.crearBDSiNoExiste();
         cosmosPersistenciaADN.crearContenedorSiNoExiste();
         Codificador codificador = new Codificador();
-        administradorADN = new AdministradorADN( administradorEvaluadoresSecuencia, cosmosPersistenciaADN, codificador);
+        OperadorMatematico operadorMatematico = new OperadorMatematico();
+        administradorADN = new AdministradorADN( administradorEvaluadoresSecuencia, cosmosPersistenciaADN, codificador, operadorMatematico);
 
     }
 
